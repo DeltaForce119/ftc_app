@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Hardware map for team Delta Force
@@ -24,8 +23,9 @@ public class Hardware
     public DcMotor motorScore = null; // SCORING MECHANISM MOTOR
 
     // INSTANTIATE SERVOS
-    public Servo servoScore = null; // SCORING SERVO
-    public CRServo servoIntake = null; // INTAKE SERVO
+    public CRServo servoScore = null; // SCORING SERVO
+    public CRServo servoIntakeL = null; // INTAKE SERVO LEFT
+    public CRServo servoIntakeR = null; // INTAKE SERVO RIGHT
 
     // CREATE NEW HardwareMap
     HardwareMap robotMap;
@@ -63,14 +63,6 @@ public class Hardware
         motorClimb.setPower(0);
         motorScore.setPower(0);
 
-        // RESET MOTOR ENCODERS
-        motorLF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorRF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorRB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorScore.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
         // SET MOTOR MODE
         motorLF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorRF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -92,14 +84,13 @@ public class Hardware
         motorScore.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // DEFINE SERVOS
-        servoScore = robotMap.get(Servo.class, "servoL");
-        servoIntake = robotMap.get(CRServo.class, "servoIntake");
+        servoScore = robotMap.get(CRServo.class, "servoScore");
+        servoIntakeL = robotMap.get(CRServo.class, "servoIntakeL");
+        servoIntakeR = robotMap.get(CRServo.class, "servoIntakeR");
 
         // SET SERVO DIRECTION
-        servoScore.setDirection(Servo.Direction.REVERSE);
-        servoIntake.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        // SET SERVO POSITION
-        servoScore.setPosition(0);
+        servoScore.setDirection(DcMotorSimple.Direction.REVERSE);
+        servoIntakeL.setDirection(DcMotorSimple.Direction.FORWARD);
+        servoIntakeR.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 }
