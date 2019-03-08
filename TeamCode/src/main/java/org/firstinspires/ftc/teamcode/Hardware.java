@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Hardware map for team Delta Force
@@ -44,10 +45,10 @@ public class Hardware
         motorScore = robotMap.get(DcMotor.class, "motorScore");
 
         // SET MOTOR DIRECTION
-        motorLF.setDirection(DcMotor.Direction.FORWARD);
-        motorRF.setDirection(DcMotor.Direction.REVERSE);
-        motorLB.setDirection(DcMotor.Direction.FORWARD);
-        motorRB.setDirection(DcMotor.Direction.REVERSE);
+        motorLF.setDirection(DcMotor.Direction.REVERSE);
+        motorRF.setDirection(DcMotor.Direction.FORWARD);
+        motorLB.setDirection(DcMotor.Direction.REVERSE);
+        motorRB.setDirection(DcMotor.Direction.FORWARD);
         motorSlide.setDirection(DcMotor.Direction.REVERSE);
         motorCup.setDirection(DcMotor.Direction.FORWARD);
         motorClimb.setDirection(DcMotor.Direction.FORWARD);
