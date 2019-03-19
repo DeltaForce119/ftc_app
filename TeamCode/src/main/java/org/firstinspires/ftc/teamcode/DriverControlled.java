@@ -62,23 +62,23 @@ public class DriverControlled extends LinearOpMode {
 
             // Move climb mechanism
             if(gamepad1.dpad_left || gamepad2.dpad_left){
-                if(map.motorClimb.getCurrentPosition() >= -5050)
-                    map.motorClimb.setPower(-climbSpeed);
-                else map.motorClimb.setPower(0);
-            }else if(gamepad1.dpad_right || gamepad2.dpad_right){
-                if(map.motorClimb.getCurrentPosition() <= -10)
+                if(map.motorClimb.getCurrentPosition() < 13200){
                     map.motorClimb.setPower(climbSpeed);
-                else map.motorClimb.setPower(0);
+                }else map.motorClimb.setPower(0);
+            }else if(gamepad1.dpad_right || gamepad2.dpad_right){
+                if(map.motorClimb.getCurrentPosition() > 200){
+                    map.motorClimb.setPower(-climbSpeed);
+                }else map.motorClimb.setPower(0);
             }else map.motorClimb.setPower(0);
 
             // Move linear slides
-            if(gamepad1.right_trigger > 0) {
+            if(gamepad1.right_trigger > 0){
                 if(map.motorSlide.getCurrentPosition() >= -1380){
-                    map.motorSlide.setPower(-slideSpeed);
+                    map.motorSlide.setPower(-gamepad1.right_trigger);
                 }else map.motorSlide.setPower(0);
             }else if(gamepad1.left_trigger > 0){
-                if(map.motorSlide.getCurrentPosition() <= 0){
-                    map.motorSlide.setPower(1);
+                if(map.motorSlide.getCurrentPosition() <= -10){
+                    map.motorSlide.setPower(gamepad1.right_trigger);
                 }else map.motorSlide.setPower(0);
             }else map.motorSlide.setPower(0);
 
@@ -103,24 +103,23 @@ public class DriverControlled extends LinearOpMode {
 
             // Move scoring arm
             if(gamepad1.dpad_up || gamepad2.dpad_up){
-                if(map.motorScore.getCurrentPosition() >= -2600 && map.motorCup.getCurrentPosition() < -160)
+                if(map.motorScore.getCurrentPosition() >= -2650 && map.motorCup.getCurrentPosition() < -160){
                     map.motorScore.setPower(-scoreSpeed);
-                else map.motorScore.setPower(0);
+                }else map.motorScore.setPower(0);
             }else if(gamepad1.dpad_down || gamepad2.dpad_down){
-                if(map.motorScore.getCurrentPosition() <= -1 && map.motorCup.getCurrentPosition() < -160)
+                if(map.motorScore.getCurrentPosition() <= -5 && map.motorCup.getCurrentPosition() < -160){
                     map.motorScore.setPower(scoreSpeed);
-                else map.motorScore.setPower(0);
+                }else map.motorScore.setPower(0);
             }else map.motorScore.setPower(0);
 
             // Move servo
-            if(gamepad2.a || gamepad1.x)
-                map.servoScore.setPower(-0.4);
-            else if(gamepad2.b)
+            if(gamepad2.b)
                 map.servoScore.setPower(0.4);
-            else if(gamepad2.x)
+            else if(gamepad1.x || gamepad2.x)
                 map.servoScore.setPower(-0.7);
             else map.servoScore.setPower(0);
 
+            map.servoMarker.setPosition(-gamepad2.right_stick_x);
             //-//-----------\\-\\
             //-//   DRIVE   \\-\\
             //-//-----------\\-\\
@@ -129,13 +128,6 @@ public class DriverControlled extends LinearOpMode {
             fr = -gamepad1.left_stick_y - gamepad1.right_stick_x - gamepad1.left_stick_x;
             bl = -gamepad1.left_stick_y + gamepad1.right_stick_x - gamepad1.left_stick_x;
             br = -gamepad1.left_stick_y - gamepad1.right_stick_x + gamepad1.left_stick_x;
-
-            /*
-            LF = Range.clip(fl,-1, 1);
-            RF = Range.clip(fr,-1, 1);
-            LB = Range.clip(bl,-1, 1);
-            RB = Range.clip(br,-1, 1);
-            */
 
             map.motorLF.setPower(fl);
             map.motorRF.setPower(fr);
@@ -155,7 +147,7 @@ public class DriverControlled extends LinearOpMode {
             telemetry.addData(">", "RF: " + map.motorRF.getCurrentPosition());
             telemetry.addData(">", "LB: " + map.motorLB.getCurrentPosition());
             telemetry.addData(">", "RB: " + map.motorRB.getCurrentPosition());
-
+            telemetry.addData(">","Servo:" + map.servoMarker.getPosition()); // 0.4
             telemetry.update();
         }
     }

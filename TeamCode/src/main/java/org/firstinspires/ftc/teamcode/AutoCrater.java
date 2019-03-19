@@ -13,13 +13,13 @@ public class AutoCrater extends LinearOpMode {
     // DEFINE ROBOT'S HARDWARE
     Hardware map = new Hardware();
     ElapsedTime runtime = new ElapsedTime();
-    static final double COUNTS_PER_MOTOR_REV = 1120;    // AndyMark ticks
+    static final double COUNTS_PER_MOTOR_REV = 383.6;    // Motor ticks
     static final double DRIVE_GEAR_REDUCTION = 2.0;     // This is < 1.0 if geared UP
     static final double WHEEL_DIAMETER_INCHES = 4.0;    // For figuring circumference
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
-    double driveSpeed = 1.0;
-    double rotateSpeed = 0.8;
-    double strafeSpeed = 0.8;
+    double driveSpeed = 0.5;
+    double rotateSpeed = 0.4;
+    double strafeSpeed = 0.4;
     MasterVision vision;
     SampleRandomizedPositions goldPosition;
 
@@ -51,99 +51,66 @@ public class AutoCrater extends LinearOpMode {
             switch (goldPosition){ // using for things in the autonomous program
                 case LEFT:
                     telemetry.addLine("going to the left");
-                    unLatch(-1, -22500);
-                    strafe(strafeSpeed, 4, 'l');
+                    unLatch(1, 13200);
+                    strafe(strafeSpeed, 6, 'l');
                     drive(0.1,1);
                     retractClimb();
                     rotate(rotateSpeed, 3, 'l');
-                    drive(driveSpeed, 19);
-                    drive(driveSpeed, -5);
-                    rotate(rotateSpeed, 19, 'r');
-                    drive(driveSpeed, -15);
-                    rotate(rotateSpeed, 6, 'r');
-                    drive(0.8, -7);
-                    rotate(rotateSpeed, 15, 'r');
-                    drive(driveSpeed, 19);
-                    map.servoIntakeR.setPower(-1);
-                    map.servoIntakeL.setPower(-1);
+                    drive(driveSpeed, 18);
+                    drive(driveSpeed, -8);
+                    rotate(rotateSpeed, 18, 'r');
+                    drive(driveSpeed, -17);
+                    rotate(rotateSpeed, 8, 'l');
+                    strafe(0.2, 10, 'l');
+                    strafe(0.2, 1.5, 'r');
+                    drive(driveSpeed, -28);
                     depositMarker();
-                    drive(driveSpeed, -14);
-                    rotate(rotateSpeed, 27.5, 'l');
-                    drive(driveSpeed, 14);
+                    drive(driveSpeed, 44);
                     lowerCup();
                     sleep(30000);
                     break;
                 case CENTER:
                     telemetry.addLine("going straight");
-                    unLatch(-1, -22500);
+                    unLatch(1, 13200);
                     strafe(strafeSpeed, 4, 'l');
                     drive(0.1,1);
-                    rotate(rotateSpeed, 3, 'r');
+                    rotate(rotateSpeed, 1.5, 'r');
                     retractClimb();
                     drive(driveSpeed, 15);
-                    drive(driveSpeed, -3);
+                    drive(driveSpeed, -4);
                     rotate(rotateSpeed, 11.5, 'r');
                     drive(driveSpeed, -25);
-                    rotate(rotateSpeed, 6, 'r');
-                    drive(0.8, -7);
-                    rotate(rotateSpeed, 15, 'r');
-                    drive(driveSpeed, 14.5);
-                    map.servoIntakeR.setPower(-1);
-                    map.servoIntakeL.setPower(-1);
+                    rotate(rotateSpeed, 7.5, 'l');
+                    strafe(0.2, 9, 'l');
+                    strafe(0.2, 1.5, 'r');
+                    drive(driveSpeed, -18);
                     depositMarker();
-                    drive(driveSpeed, -13);
-                    rotate(1, 27, 'l');
-                    drive(driveSpeed, 12);
+                    drive(driveSpeed, 38);
                     lowerCup();
                     sleep(30000);
                     break;
                 case RIGHT:
                     telemetry.addLine("going to the right");
-                    unLatch(-1, -22500);
+                    unLatch(1, 13200);
                     strafe(strafeSpeed, 4, 'l');
                     drive(0.1,1);
                     retractClimb();
                     rotate(rotateSpeed, 6, 'r');
-                    drive(driveSpeed, 20);
-                    drive(driveSpeed, -6);
-                    rotate(rotateSpeed, 10, 'r');
+                    drive(driveSpeed, 19);
+                    drive(driveSpeed, -7);
+                    rotate(rotateSpeed, 8, 'r');
                     drive(driveSpeed, -30);
-                    rotate(driveSpeed, 6, 'r');
-                    drive(0.8, -5);
-                    rotate(rotateSpeed, 15, 'r');
-                    drive(driveSpeed, 20);
-                    map.servoIntakeR.setPower(-1);
-                    map.servoIntakeL.setPower(-1);
+                    rotate(rotateSpeed, 9, 'l');
+                    strafe(0.2, 9, 'l');
+                    strafe(0.2, 1.5, 'r');
+                    drive(driveSpeed, -22);
                     depositMarker();
-                    drive(driveSpeed, -14);
-                    rotate(rotateSpeed, 29, 'l');
-                    drive(driveSpeed, 15);
+                    drive(driveSpeed, 43);
                     lowerCup();
                     sleep(30000);
                     break;
                 case UNKNOWN:
                     telemetry.addLine("staying put");
-                    unLatch(-1, -22500);
-                    strafe(strafeSpeed, 4, 'l');
-                    drive(0.1,1);
-                    rotate(rotateSpeed, 3, 'r');
-                    retractClimb();
-                    drive(driveSpeed, 15);
-                    drive(driveSpeed, -3);
-                    rotate(rotateSpeed, 11.5, 'r');
-                    drive(driveSpeed, -25);
-                    rotate(rotateSpeed, 6, 'r');
-                    drive(0.8, -7);
-                    rotate(rotateSpeed, 15, 'r');
-                    drive(driveSpeed, 14.5);
-                    map.servoIntakeR.setPower(-1);
-                    map.servoIntakeL.setPower(-1);
-                    depositMarker();
-                    drive(driveSpeed, -13);
-                    rotate(1, 27, 'l');
-                    drive(driveSpeed, 12);
-                    lowerCup();
-                    sleep(30000);
                     break;
             }
 
@@ -162,8 +129,8 @@ public class AutoCrater extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position
-            newLFtarget = map.motorLF.getCurrentPosition() - (int) (inches * COUNTS_PER_INCH);
-            newRFtarget = map.motorRF.getCurrentPosition() - (int) (inches * COUNTS_PER_INCH);
+            newLFtarget = map.motorLF.getCurrentPosition() + (int) (inches * COUNTS_PER_INCH);
+            newRFtarget = map.motorRF.getCurrentPosition() + (int) (inches * COUNTS_PER_INCH);
             newLBtarget = map.motorLB.getCurrentPosition() + (int) (inches * COUNTS_PER_INCH);
             newRBtarget = map.motorRB.getCurrentPosition() + (int) (inches * COUNTS_PER_INCH);
             map.motorLF.setTargetPosition(newLFtarget);
@@ -211,23 +178,23 @@ public class AutoCrater extends LinearOpMode {
 
         if (opModeIsActive()){
 
-            if(direction == 'r'){
-                // Determine new target position
-                newLFtarget = map.motorLF.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
-                newRFtarget = map.motorRF.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
-                newLBtarget = map.motorLB.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
-                newRBtarget = map.motorRB.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
-                map.motorLF.setTargetPosition(newLFtarget);
-                map.motorRF.setTargetPosition(newRFtarget);
-                map.motorLB.setTargetPosition(newLBtarget);
-                map.motorRB.setTargetPosition(newRBtarget);
-
-            }else if(direction == 'l'){
+            if(direction == 'l'){
                 // Determine new target position
                 newLFtarget = map.motorLF.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
                 newRFtarget = map.motorRF.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
                 newLBtarget = map.motorLB.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
                 newRBtarget = map.motorRB.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
+                map.motorLF.setTargetPosition(newLFtarget);
+                map.motorRF.setTargetPosition(newRFtarget);
+                map.motorLB.setTargetPosition(newLBtarget);
+                map.motorRB.setTargetPosition(newRBtarget);
+
+            }else if(direction == 'r'){
+                // Determine new target position
+                newLFtarget = map.motorLF.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
+                newRFtarget = map.motorRF.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
+                newLBtarget = map.motorLB.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
+                newRBtarget = map.motorRB.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
                 map.motorLF.setTargetPosition(newLFtarget);
                 map.motorRF.setTargetPosition(newRFtarget);
                 map.motorLB.setTargetPosition(newLBtarget);
@@ -356,18 +323,9 @@ public class AutoCrater extends LinearOpMode {
 
     private void depositMarker(){
         if(opModeIsActive()) {
-            map.motorCup.setTargetPosition(-260);
-            map.motorCup.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            map.motorCup.setPower(0.5);
-            map.servoIntakeL.setPower(-1);
-            map.servoIntakeR.setPower(-1);
-            while(opModeIsActive() && map.motorCup.isBusy()){
-                telemetry.addData(">","Depositing marker");
-                telemetry.update();
-            }
-            map.motorCup.setTargetPosition(-50);
-            map.motorCup.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            map.motorCup.setPower(0.3);
+            map.servoMarker.setPosition(0.4);
+            sleep(500);
+            map.servoMarker.setPosition(0);
         }
     }
 

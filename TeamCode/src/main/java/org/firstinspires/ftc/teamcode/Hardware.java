@@ -24,6 +24,7 @@ public class Hardware
     public DcMotor motorScore = null; // SCORING MECHANISM MOTOR
 
     // INSTANTIATE SERVOS
+    public Servo servoMarker = null; // SERVO SCORING SERVO
     public CRServo servoScore = null; // SCORING SERVO
     public CRServo servoIntakeL = null; // INTAKE SERVO LEFT
     public CRServo servoIntakeR = null; // INTAKE SERVO RIGHT
@@ -85,13 +86,19 @@ public class Hardware
         motorScore.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // DEFINE SERVOS
+        servoMarker = robotMap.get(Servo.class, "servoMarker");
         servoScore = robotMap.get(CRServo.class, "servoScore");
         servoIntakeL = robotMap.get(CRServo.class, "servoIntakeL");
         servoIntakeR = robotMap.get(CRServo.class, "servoIntakeR");
 
+
         // SET SERVO DIRECTION
+        servoMarker.setDirection(Servo.Direction.REVERSE);
         servoScore.setDirection(DcMotorSimple.Direction.REVERSE);
         servoIntakeL.setDirection(DcMotorSimple.Direction.FORWARD);
         servoIntakeR.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        // SET SERVO POSITION
+        servoMarker.setPosition(0);
     }
 }

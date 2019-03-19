@@ -13,13 +13,13 @@ public class AutoDepot extends LinearOpMode {
     // DEFINE ROBOT'S HARDWARE
     Hardware map = new Hardware();
     ElapsedTime runtime = new ElapsedTime();
-    static final double COUNTS_PER_MOTOR_REV = 1120;    // AndyMark ticks
+    static final double COUNTS_PER_MOTOR_REV = 383.6;    // AndyMark ticks
     static final double DRIVE_GEAR_REDUCTION = 2.0;     // This is < 1.0 if geared UP
     static final double WHEEL_DIAMETER_INCHES = 4.0;    // For figuring circumference
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
-    double driveSpeed = 1;
-    double rotateSpeed = 0.8;
-    double strafeSpeed = 0.8;
+    double driveSpeed = 0.3;
+    double rotateSpeed = 0.4;
+    double strafeSpeed = 0.4;
     MasterVision vision;
     SampleRandomizedPositions goldPosition;
 
@@ -51,89 +51,69 @@ public class AutoDepot extends LinearOpMode {
             switch (goldPosition){ // using for things in the autonomous program
                 case LEFT:
                     telemetry.addLine("going to the left");
-                    unLatch(-1, -22500);
+                    unLatch(1, 13200);
                     drive(0.1,1);
-                    strafe(strafeSpeed, 4, 'l');
-                    rotate(rotateSpeed, 3, 'l');
+                    strafe(strafeSpeed, 3, 'l');
                     retractClimb();
-                    drive(driveSpeed, 21);
-                    rotate(rotateSpeed, 8.5, 'r');
-                    //moveSlide(-0.8, -1300);
-                    //depositMarker();
-                    //moveSlide(0.8, 0);
-                    drive(driveSpeed, -3);
-                    rotate(rotateSpeed, 16, 'r');
-                    drive(driveSpeed, -15);
-                    rotate(rotateSpeed,15, 'r');
-                    strafe(strafeSpeed, 3, 'r');
-                    drive(driveSpeed, 18);
+                    sleep(500);
+                    rotate(rotateSpeed, 3, 'l');
+                    drive(driveSpeed, 16);
+                    drive(driveSpeed, -6);
+                    rotate(rotateSpeed, 18, 'r');
+                    drive(driveSpeed, -17);
+                    rotate(rotateSpeed,19, 'r');
+                    strafe(0.2, 9, 'r');
+                    strafe(0.2, 2, 'l');
+                    drive(driveSpeed, -27);
+                    depositMarker();
+                    drive(driveSpeed, 44);
                     lowerCup();
                     sleep(30000);
                     break;
                 case CENTER:
                     telemetry.addLine("going straight");
-                    unLatch(-1, -22500);
+                    unLatch(1, 13200);
                     drive(0.1,1);
-                    strafe(strafeSpeed, 4, 'l');
+                    strafe(strafeSpeed, 3, 'l');
                     retractClimb();
-                    rotate(rotateSpeed, 2, 'r');
-                    drive(driveSpeed, 23);
-                    rotate(0.5, 2, 'l');
-                    drive(driveSpeed, 3);
+                    sleep(500);
+                    rotate(rotateSpeed, 1.5, 'r');
+                    drive(driveSpeed, 17);
+                    drive(driveSpeed, -8);
+                    rotate(rotateSpeed, 14, 'r');
+                    drive(driveSpeed, -20);
+                    rotate(rotateSpeed,18, 'r');
+                    strafe(0.2, 9, 'r');
+                    strafe(0.2, 2, 'l');
+                    drive(driveSpeed, -25);
                     depositMarker();
-                    drive(driveSpeed, -15);
-                    rotate(rotateSpeed, 14.5, 'r');
-                    drive(driveSpeed, -27);
-                    rotate(rotateSpeed, 7, 'r');
-                    drive(0.8, -6);
-                    rotate(rotateSpeed, 15, 'r');
-                    strafe(0.5, 7, 'r');
-                    drive(0.5, 2);
+                    drive(driveSpeed, 45);
                     lowerCup();
                     sleep(30000);
                     break;
                 case RIGHT:
                     telemetry.addLine("going to the right");
-                    unLatch(-1, -22500);
-                    strafe(strafeSpeed, 4, 'l');
+                    unLatch(1, 13200);
                     drive(0.1,1);
+                    strafe(strafeSpeed, 3, 'l');
                     retractClimb();
-                    rotate(rotateSpeed, 7.5, 'r');
-                    drive(driveSpeed, 20);
-                    drive(driveSpeed, -6);
+                    sleep(500);
+                    rotate(rotateSpeed, 5.5, 'r');
+                    drive(driveSpeed, 21);
+                    drive(driveSpeed, -7.5);
                     rotate(rotateSpeed, 8.5, 'r');
-                    drive(driveSpeed, -5);
-                    rotate(rotateSpeed, 14, 'l');
-                    moveSlide(-0.8, -1300);
+                    drive(driveSpeed, -32);
+                    rotate(rotateSpeed,20, 'r');
+                    strafe(0.2, 9, 'r');
+                    strafe(0.2, 2, 'l');
+                    drive(driveSpeed, -32);
                     depositMarker();
-                    moveSlide(0.8, 0);
-                    rotate(rotateSpeed, 13.5, 'r');
-                    drive(driveSpeed, -27);
-                    rotate(rotateSpeed, 7, 'r');
-                    drive(0.8, -8);
-                    rotate(rotateSpeed, 15, 'r');
-                    drive(driveSpeed, 3.5);
+                    drive(driveSpeed, 44);
                     lowerCup();
                     sleep(30000);
                     break;
                 case UNKNOWN:
                     telemetry.addLine("staying put");
-                    drive(0.1,1);
-                    strafe(strafeSpeed, 4, 'l');
-                    rotate(rotateSpeed, 5, 'l');
-                    //retractClimb();
-                    drive(driveSpeed, 21);
-                    rotate(rotateSpeed, 10, 'r');
-                    //moveSlide(-0.8, -1300);
-                    //depositMarker();
-                    //moveSlide(0.8, 0);
-                    drive(driveSpeed, -3);
-                    rotate(rotateSpeed, 20, 'r');
-                    drive(driveSpeed, -17);
-                    rotate(rotateSpeed,15, 'r');
-                    strafe(strafeSpeed, 8, 'r');
-                    drive(driveSpeed, 10);
-                    //lowerCup();
                     sleep(30000);
                     break;
             }
@@ -153,8 +133,8 @@ public class AutoDepot extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position
-            newLFtarget = map.motorLF.getCurrentPosition() - (int) (inches * COUNTS_PER_INCH);
-            newRFtarget = map.motorRF.getCurrentPosition() - (int) (inches * COUNTS_PER_INCH);
+            newLFtarget = map.motorLF.getCurrentPosition() + (int) (inches * COUNTS_PER_INCH);
+            newRFtarget = map.motorRF.getCurrentPosition() + (int) (inches * COUNTS_PER_INCH);
             newLBtarget = map.motorLB.getCurrentPosition() + (int) (inches * COUNTS_PER_INCH);
             newRBtarget = map.motorRB.getCurrentPosition() + (int) (inches * COUNTS_PER_INCH);
             map.motorLF.setTargetPosition(newLFtarget);
@@ -202,23 +182,23 @@ public class AutoDepot extends LinearOpMode {
 
         if (opModeIsActive()){
 
-            if(direction == 'r'){
-                // Determine new target position
-                newLFtarget = map.motorLF.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
-                newRFtarget = map.motorRF.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
-                newLBtarget = map.motorLB.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
-                newRBtarget = map.motorRB.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
-                map.motorLF.setTargetPosition(newLFtarget);
-                map.motorRF.setTargetPosition(newRFtarget);
-                map.motorLB.setTargetPosition(newLBtarget);
-                map.motorRB.setTargetPosition(newRBtarget);
-
-            }else if(direction == 'l'){
+            if(direction == 'l'){
                 // Determine new target position
                 newLFtarget = map.motorLF.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
                 newRFtarget = map.motorRF.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
                 newLBtarget = map.motorLB.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
                 newRBtarget = map.motorRB.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
+                map.motorLF.setTargetPosition(newLFtarget);
+                map.motorRF.setTargetPosition(newRFtarget);
+                map.motorLB.setTargetPosition(newLBtarget);
+                map.motorRB.setTargetPosition(newRBtarget);
+
+            }else if(direction == 'r'){
+                // Determine new target position
+                newLFtarget = map.motorLF.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
+                newRFtarget = map.motorRF.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
+                newLBtarget = map.motorLB.getCurrentPosition() - (int)(inches * COUNTS_PER_INCH);
+                newRBtarget = map.motorRB.getCurrentPosition() + (int)(inches * COUNTS_PER_INCH);
                 map.motorLF.setTargetPosition(newLFtarget);
                 map.motorRF.setTargetPosition(newRFtarget);
                 map.motorLB.setTargetPosition(newLBtarget);
@@ -339,18 +319,6 @@ public class AutoDepot extends LinearOpMode {
         sleep(25);
     }
 
-    private void moveSlide(double speed, int ticks){
-        map.motorSlide.setTargetPosition(ticks);
-        map.motorSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        map.motorSlide.setPower(Math.abs(speed));
-        while(map.motorSlide.isBusy()){
-            telemetry.addData("Status: ", "Moving slide mechanism");
-            telemetry.update();
-        }
-        map.motorSlide.setPower(0);
-        map.motorSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-
     private void retractClimb(){
         map.motorClimb.setTargetPosition(0);
         map.motorClimb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -359,17 +327,9 @@ public class AutoDepot extends LinearOpMode {
 
     private void depositMarker(){
         if(opModeIsActive()) {
-            map.motorCup.setTargetPosition(-260);
-            map.motorCup.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            map.motorCup.setPower(0.5);
-            while(opModeIsActive() && map.motorCup.isBusy()){
-                telemetry.addData(">","Depositing marker");
-                telemetry.update();
-            }
-            map.motorCup.setTargetPosition(-50);
-            map.motorCup.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            map.motorCup.setPower(0.3);
-
+            map.servoMarker.setPosition(0.4);
+            sleep(500);
+            map.servoMarker.setPosition(0);
         }
     }
 
@@ -399,4 +359,5 @@ public class AutoDepot extends LinearOpMode {
         map.motorClimb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         map.motorCup.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
+
 }
