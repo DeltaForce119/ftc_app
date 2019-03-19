@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.vision.MasterVision;
 import org.firstinspires.ftc.teamcode.vision.SampleRandomizedPositions;
 
 @Autonomous
-public class AutoCrater extends LinearOpMode {
+public class DoubleSampling extends LinearOpMode {
 
     // DEFINE ROBOT'S HARDWARE
     Hardware map = new Hardware();
@@ -55,17 +55,22 @@ public class AutoCrater extends LinearOpMode {
                     strafe(strafeSpeed, 6, 'l');
                     drive(0.1,1);
                     retractClimb();
+                    sleep(500);
                     rotate(rotateSpeed, 3, 'l');
                     drive(driveSpeed, 18);
                     drive(driveSpeed, -8);
-                    rotate(rotateSpeed, 18, 'r');
+                    rotate(rotateSpeed, 17, 'r');
                     drive(driveSpeed, -17);
                     rotate(rotateSpeed, 8, 'l');
                     strafe(0.2, 10, 'l');
                     strafe(0.2, 1.5, 'r');
-                    drive(driveSpeed, -28);
+                    drive(driveSpeed, -35);
                     depositMarker();
-                    drive(driveSpeed, 44);
+                    strafe(strafeSpeed, 22, 'r');
+                    strafe(strafeSpeed, 21, 'l');
+                    drive(driveSpeed, 24);
+                    strafe(0.2, 6, 'l');
+                    drive(driveSpeed, 24);
                     lowerCup();
                     sleep(30000);
                     break;
@@ -83,9 +88,13 @@ public class AutoCrater extends LinearOpMode {
                     rotate(rotateSpeed, 7.5, 'l');
                     strafe(0.2, 9, 'l');
                     strafe(0.2, 1.5, 'r');
-                    drive(driveSpeed, -18);
+                    drive(driveSpeed, -21);
                     depositMarker();
-                    drive(driveSpeed, 38);
+                    strafe(strafeSpeed, 16, 'r');
+                    strafe(strafeSpeed, 15, 'l');
+                    drive(driveSpeed, 19);
+                    strafe(0.2, 6, 'l');
+                    drive(driveSpeed, 21);
                     lowerCup();
                     sleep(30000);
                     break;
@@ -95,17 +104,22 @@ public class AutoCrater extends LinearOpMode {
                     strafe(strafeSpeed, 4, 'l');
                     drive(0.1,1);
                     retractClimb();
-                    rotate(rotateSpeed, 6, 'r');
+                    rotate(rotateSpeed, 5.5, 'r');
                     drive(driveSpeed, 19);
-                    drive(driveSpeed, -7);
-                    rotate(rotateSpeed, 8, 'r');
+                    drive(driveSpeed, -7.5);
+                    rotate(rotateSpeed, 9.5, 'r');
                     drive(driveSpeed, -30);
                     rotate(rotateSpeed, 9, 'l');
                     strafe(0.2, 9, 'l');
                     strafe(0.2, 1.5, 'r');
-                    drive(driveSpeed, -22);
+                    drive(driveSpeed, -25);
                     depositMarker();
-                    drive(driveSpeed, 43);
+                    drive(driveSpeed, 10);
+                    strafe(strafeSpeed, 10, 'r');
+                    strafe(strafeSpeed, 9, 'l');
+                    drive(driveSpeed, 16);
+                    strafe(0.2, 8, 'l');
+                    drive(driveSpeed, 15);
                     lowerCup();
                     sleep(30000);
                     break;
